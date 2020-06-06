@@ -5,10 +5,15 @@ A PHP text manipulation library.
 
 <table>
     <tr>
-        <td><a href="#readLine">readLine</a></td>
-        <td><a href="#readLines">readLines</a></td>
-        <td><a href="#readUntil">readUntil</a></td>
+        <td><a href="#line">line</a></td>
+        <td><a href="#lines">lines</a></td>
+        <td><a href="#until">until</a></td>
     </tr>
+     <tr>
+            <td><a href="#char">char</a></td>
+            <td><a href="#chars">chars</a></td>
+            <td><a href="#beginning">beginning</a></td>
+     </tr>
 </table>
 
 ## Installation
@@ -16,28 +21,28 @@ A PHP text manipulation library.
 composer require conkal/text
 ```
 
-##### readLine()
+##### line()
 
 Read a single line from text file to buffer
 
 ```php
-\Conkal\Text::read('test.txt')->open()->readLine()->get(); // first line
+\Conkal\Text::read('test.txt')->open()->line()->get(); // first line
 ```
-##### readLines()
+##### lines()
 
 Read a n lines from text file to buffer
 
 ```php
-\Conkal\Text::read('test.txt')->open()->readLines(2)->get(); 
+\Conkal\Text::read('test.txt')->open()->lines(2)->get(); 
 //1. Line
 //2. Line
 ```
-##### readUntil()
+##### until()
 
 Read all data until search text
 
 ```php
-\Conkal\Text::read('test.txt')->open()->readUntil('2. Line')->get(); 
+\Conkal\Text::read('test.txt')->open()->until('2. Line')->get(); 
 //1. Line
 //2. Line
 ```

@@ -33,16 +33,16 @@ class Text
         fclose($this->fp);
     }
 
-    public function readLine()
+    public function line()
     {
         $this->buffer .= fgets($this->fp);
         return $this;
     }
 
-    public function readLines($n)
+    public function lines($n)
     {
         for ($i = 0; $i < $n; $i++) {
-            $this->readLine();
+            $this->line();
         }
         return $this;
     }
@@ -58,7 +58,7 @@ class Text
         return trim($this->buffer);
     }
 
-    public function readUntil($search)
+    public function until($search)
     {
         $buffer = [];
         $begin = ftell($this->fp);
