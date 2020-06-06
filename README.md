@@ -32,7 +32,7 @@ Read a n lines from text file to buffer
 //1. Line
 //2. Line
 ```
-##### readUntil($search)
+##### readUntil()
 
 Read all data until search text
 
