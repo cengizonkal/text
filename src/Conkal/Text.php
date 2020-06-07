@@ -24,13 +24,14 @@ class Text
 
     public function open()
     {
-        $this->fp = fopen($this->path, 'r');
+        $this->fp = fopen($this->path, 'rt');
         return $this;
     }
 
     public function close()
     {
         fclose($this->fp);
+        return $this;
     }
 
     public function line()
@@ -55,7 +56,7 @@ class Text
 
     public function get()
     {
-        return trim($this->buffer);
+        return $this->buffer;
     }
 
     public function until($search)
@@ -67,13 +68,20 @@ class Text
             if (sizeof($buffer) > strlen($search)) {
                 array_shift($buffer);
             }
-            if (implode($buffer) == $search) {
+            if (implode($buffer) === $search) {
                 $end = ftell($this->fp);
                 fseek($this->fp, $begin);
                 $this->buffer .= fread($this->fp, $end);
+
                 break;
             }
         }
+        return $this;
+    }
+
+    public function trim()
+    {
+        $this->buffer = trim($this->buffer);
         return $this;
     }
 
