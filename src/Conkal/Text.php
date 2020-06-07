@@ -59,6 +59,11 @@ class Text
         return $this->buffer;
     }
 
+    public function save($filename)
+    {
+        file_put_contents($filename, $this->buffer);
+    }
+
     public function until($search)
     {
         $buffer = [];
@@ -82,6 +87,22 @@ class Text
     public function trim()
     {
         $this->buffer = trim($this->buffer);
+        return $this;
+    }
+
+    public function char()
+    {
+        if (false !== ($char = fgetc($this->fp))) {
+            $this->buffer .= $char;
+        }
+        return $this;
+    }
+
+    public function chars($n)
+    {
+        for ($i = 0; $i < $n; $i++) {
+            $this->char();
+        }
         return $this;
     }
 
