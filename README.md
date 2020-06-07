@@ -1,6 +1,6 @@
 # Text
 
-A PHP text manipulation library.
+A PHP text file library.
 * [Installation](#installation)
 
 <table>
