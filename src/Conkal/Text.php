@@ -106,5 +106,11 @@ class Text
         return $this;
     }
 
+    public function beginning()
+    {
+        fseek($this->fp, 0);
+        return $this;
+    }
+
 
 }

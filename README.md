@@ -46,3 +46,29 @@ Read all data until search text
 //1. Line
 //2. Line
 ```
+##### char()
+
+Read a single char
+
+```php
+\Conkal\Text::read('test.txt')->open()->char()->get(); 
+//1
+```
+
+##### chars(n)
+
+Read a single char
+
+```php
+\Conkal\Text::read('test.txt')->open()->chars(4)->get(); 
+//1. L
+```
+
+##### beginning()
+
+Move file pointer to beginning
+
+```php
+\Conkal\Text::read('test.txt')->open()->char()->beginning()->char()->get(); 
+//11
+```
