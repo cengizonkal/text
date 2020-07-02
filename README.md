@@ -1,7 +1,9 @@
 # Text
+![Build](https://github.com/cengizonkal/text/workflows/Build/badge.svg)
 
 A PHP text file library.
 * [Installation](#installation)
+
 
 <table>
     <tr>
