@@ -22,6 +22,7 @@ class TextTest extends PHPUnit_Framework_TestCase
         $text = \Conkal\Text::read('tests/test.txt');
         $text->open();
         $this->assertEquals("1. Line\n2. Line\n3. Line", $text->until('3. Line')->get());
+        $this->assertEquals("2. Line\n3. Line", $text->beginning()->clear()->line()->clear()->until('3. Line')->get());
     }
 
     public function test_until()
@@ -61,5 +62,12 @@ class TextTest extends PHPUnit_Framework_TestCase
         $text = \Conkal\Text::read('tests/test.txt');
         $text->open();
         $this->assertEquals("1.", $text->open()->line()->beginning()->clear()->chars(2)->get());
+    }
+
+    public function test_seek()
+    {
+        $text = \Conkal\Text::read('tests/test.txt');
+        $text->open();
+        $this->assertEquals(" Line\n", $text->open()->seek('33.')->line()->get());
     }
 }

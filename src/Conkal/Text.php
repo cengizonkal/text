@@ -10,6 +10,7 @@ class Text
     private $fp;
     private $path;
     private $buffer = '';
+    private $locations = [];
 
 
     public static function read($path)
@@ -66,21 +67,11 @@ class Text
 
     public function until($search)
     {
-        $buffer = [];
         $begin = ftell($this->fp);
-        while (false !== ($char = fgetc($this->fp))) {
-            array_push($buffer, $char);
-            if (sizeof($buffer) > strlen($search)) {
-                array_shift($buffer);
-            }
-            if (implode($buffer) === $search) {
-                $end = ftell($this->fp);
-                fseek($this->fp, $begin);
-                $this->buffer .= fread($this->fp, $end);
-
-                break;
-            }
-        }
+        $this->seek($search);
+        $end = ftell($this->fp);
+        fseek($this->fp, $begin);
+        $this->buffer .= fread($this->fp, $end - $begin);
         return $this;
     }
 
@@ -110,6 +101,27 @@ class Text
     {
         fseek($this->fp, 0);
         return $this;
+    }
+
+    public function seek($search)
+    {
+        $buffer = [];
+
+        while (false !== ($char = fgetc($this->fp))) {
+            array_push($buffer, $char);
+            if (sizeof($buffer) > strlen($search)) {
+                array_shift($buffer);
+            }
+            if (implode($buffer) === $search) {
+                break;
+            }
+        }
+        return $this;
+    }
+
+    public function remember()
+    {
+        array_push($this->locations, ftell($this->fp));
     }
 
 
