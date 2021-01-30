@@ -71,4 +71,12 @@ class TextTest extends PHPUnit_Framework_TestCase
         $this->assertEquals(" Line\n", $text->open()->seek('33.')->line()->get());
         $this->assertEquals(" Line\n34. Line\n35.", $text->open()->clear()->seek('33.')->until('35.')->get());
     }
+
+    public function test_remember()
+    {
+        $text = \Conkal\Text::read('tests/test.txt');
+        $text->open();
+        $this->assertEquals(" Line\n Line\n", $text->open()->seek('33.')->remember()->line()->recall(0)->line()->get());
+
+    }
 }
