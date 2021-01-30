@@ -122,6 +122,21 @@ class Text
     public function remember()
     {
         array_push($this->locations, ftell($this->fp));
+        return $this;
+    }
+
+    public function end()
+    {
+        fseek($this->fp, 0, SEEK_END);
+        return $this;
+    }
+
+    public function recall($location)
+    {
+        if (isset($this->locations[$location])) {
+            fseek($this->fp, $this->locations[$location]);
+        }
+        return $this;
     }
 
 
