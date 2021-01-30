@@ -1,6 +1,6 @@
 <?php
 
-class TextTest extends PHPUnit_Framework_TestCase
+class TextTest extends PHPUnit\Framework\TestCase
 {
     public function test_line_read()
     {
