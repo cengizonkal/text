@@ -2,20 +2,17 @@
 ![Build](https://github.com/cengizonkal/text/workflows/Build/badge.svg)
 
 A PHP text file library.
-* [Installation](#installation)
-
 
 <table>
     <tr>
         <td><a href="#line">line</a></td>
         <td><a href="#lines">lines</a></td>
         <td><a href="#until">until</a></td>
+        <td><a href="#char">char</a></td>
+        <td><a href="#chars">chars</a></td>
+        <td><a href="#beginning">beginning</a></td>
+        <td><a href="#seek">seek</a></td>
     </tr>
-     <tr>
-            <td><a href="#char">char</a></td>
-            <td><a href="#chars">chars</a></td>
-            <td><a href="#beginning">beginning</a></td>
-     </tr>
 </table>
 
 ## Installation
@@ -73,4 +70,12 @@ Move file pointer to beginning
 ```php
 \Conkal\Text::read('test.txt')->open()->char()->beginning()->char()->get(); 
 //11
+```
+
+##### seek()
+Move file pointer to search location
+```php
+$text = \Conkal\Text::read('tests/test.txt');
+$text->open()->seek('33.')->line()->get();
+//Line 
 ```
