@@ -131,11 +131,19 @@ class Text
         return $this;
     }
 
-    public function recall($location)
+    public function recall()
     {
-        if (isset($this->locations[$location])) {
-            fseek($this->fp, $this->locations[$location]);
-        }
+        $location = array_pop($this->locations);
+        fseek($this->fp, $location);
+        return $this;
+    }
+
+    public function pick()
+    {
+        $end = ftell($this->fp);
+        $location = array_pop($this->locations);
+        fseek($this->fp, $location);
+        $this->buffer .= fread($this->fp, $end - $location);
         return $this;
     }
 
