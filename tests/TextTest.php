@@ -68,21 +68,24 @@ class TextTest extends PHPUnit\Framework\TestCase
     {
         $text = \Conkal\Text::read('tests/test.txt');
         $text->open();
-        $this->assertEquals(" Line\n", $text->open()->seek('33.')->line()->get());
-        $this->assertEquals(" Line\n34. Line\n35.", $text->open()->clear()->seek('33.')->until('35.')->get());
+        $this->assertEquals(" Line\n", $text->open()->find('33.')->line()->get());
+        $this->assertEquals(" Line\n34. Line\n35.", $text->open()->clear()->find('33.')->until('35.')->get());
     }
 
     public function test_remember()
     {
         $text = \Conkal\Text::read('tests/test.txt');
         $text->open();
-        $this->assertEquals(" Line\n Line\n", $text->open()->seek('33.')->remember()->line()->recall()->line()->get());
+        $this->assertEquals(" Line\n Line\n", $text->open()->find('33.')->remember()->line()->recall()->line()->get());
     }
 
-    public function test_it_should_pick_between_to_points()
+
+    public function test_move()
     {
         $text = \Conkal\Text::read('tests/test.txt');
         $text->open();
-        $this->assertEquals(" Line\n51.", $text->seek('50.')->remember()->seek('51.')->pick()->get());
+        $this->assertEquals("33. Line\n", $text->open()->find('33.')->move(-3)->line()->get());
     }
+
+
 }

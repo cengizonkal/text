@@ -68,7 +68,7 @@ class Text
     public function until($search)
     {
         $begin = ftell($this->fp);
-        $this->seek($search);
+        $this->find($search);
         $end = ftell($this->fp);
         fseek($this->fp, $begin);
         $this->buffer .= fread($this->fp, $end - $begin);
@@ -103,7 +103,7 @@ class Text
         return $this;
     }
 
-    public function seek($search)
+    public function find($search)
     {
         $buffer = [];
 
@@ -138,12 +138,9 @@ class Text
         return $this;
     }
 
-    public function pick()
+    public function move($charLength)
     {
-        $end = ftell($this->fp);
-        $location = array_pop($this->locations);
-        fseek($this->fp, $location);
-        $this->buffer .= fread($this->fp, $end - $location);
+        fseek($this->fp, $charLength, SEEK_CUR);
         return $this;
     }
 

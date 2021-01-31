@@ -11,7 +11,7 @@ A PHP text file library.
         <td><a href="#char">char</a></td>
         <td><a href="#chars">chars</a></td>
         <td><a href="#beginning">beginning</a></td>
-        <td><a href="#seek">seek</a></td>
+        <td><a href="#find">find</a></td>
     </tr>
 </table>
 
@@ -72,10 +72,11 @@ Move file pointer to beginning
 //11
 ```
 
-##### seek()
+##### find()
 Move file pointer to search location
+
 ```php
 $text = \Conkal\Text::read('tests/test.txt');
-$text->open()->seek('33.')->line()->get();
+$text->open()->find('33.')->line()->get();
 //Line 
 ```
