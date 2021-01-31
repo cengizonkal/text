@@ -76,7 +76,7 @@ class TextTest extends PHPUnit\Framework\TestCase
     {
         $text = \Conkal\Text::read('tests/test.txt');
         $text->open();
-        $this->assertEquals(" Line\n Line\n", $text->open()->seek('33.')->remember()->line()->recall(0)->line()->get());
+        $this->assertEquals(" Line\n Line\n", $text->open()->seek('33.')->remember()->line()->recall()->line()->get());
     }
 
     public function test_it_should_pick_between_to_points()
