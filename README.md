@@ -25,14 +25,14 @@ composer require conkal/text
 Read a single line from text file to buffer
 
 ```php
-\Conkal\Text::read('test.txt')->open()->line()->get(); // first line
+\Conkal\Text::read('test.txt')->line()->get(); // first line
 ```
 ##### lines()
 
 Read a n lines from text file to buffer
 
 ```php
-\Conkal\Text::read('test.txt')->open()->lines(2)->get(); 
+\Conkal\Text::read('test.txt')->lines(2)->get(); 
 //1. Line
 //2. Line
 ```
@@ -41,7 +41,7 @@ Read a n lines from text file to buffer
 Read all data until search text
 
 ```php
-\Conkal\Text::read('test.txt')->open()->until('2. Line')->get(); 
+\Conkal\Text::read('test.txt')->until('2. Line')->get(); 
 //1. Line
 //2. Line
 ```
@@ -50,7 +50,7 @@ Read all data until search text
 Read a single char
 
 ```php
-\Conkal\Text::read('test.txt')->open()->char()->get(); 
+\Conkal\Text::read('test.txt')->char()->get(); 
 //1
 ```
 
@@ -59,7 +59,7 @@ Read a single char
 Read a single char
 
 ```php
-\Conkal\Text::read('test.txt')->open()->chars(4)->get(); 
+\Conkal\Text::read('test.txt')->chars(4)->get(); 
 //1. L
 ```
 
@@ -68,7 +68,7 @@ Read a single char
 Move file pointer to beginning
 
 ```php
-\Conkal\Text::read('test.txt')->open()->char()->beginning()->char()->get(); 
+\Conkal\Text::read('test.txt')->char()->beginning()->char()->get(); 
 //11
 ```
 
@@ -77,6 +77,6 @@ Move file pointer to search location
 
 ```php
 $text = \Conkal\Text::read('tests/test.txt');
-$text->open()->find('33.')->line()->get();
+$text->find('33.')->line()->get();
 //Line 
 ```
