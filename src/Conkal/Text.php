@@ -4,40 +4,18 @@ namespace Conkal;
 
 use Closure;
 
-class Text
+class Text extends \SplFileObject
 {
-
-    private $fp;
-    private $path;
-    private $buffer = '';
-    private $locations = [];
-
+    private $buffer;
 
     public static function read($path)
     {
-        return new self($path);
-    }
-
-    public function __construct($path)
-    {
-        $this->path = $path;
-    }
-
-    public function open()
-    {
-        $this->fp = fopen($this->path, 'rt');
-        return $this;
-    }
-
-    public function close()
-    {
-        fclose($this->fp);
-        return $this;
+        return new self($path, 'rt');
     }
 
     public function line()
     {
-        $this->buffer .= fgets($this->fp);
+        $this->buffer .= $this->fgets();
         return $this;
     }
 
@@ -67,11 +45,11 @@ class Text
 
     public function until($search)
     {
-        $begin = ftell($this->fp);
+        $begin = $this->ftell();
         $this->find($search);
-        $end = ftell($this->fp);
-        fseek($this->fp, $begin);
-        $this->buffer .= fread($this->fp, $end - $begin);
+        $end = $this->ftell();
+        $this->fseek($begin);
+        $this->buffer .= $this->fread($end - $begin);
         return $this;
     }
 
@@ -83,7 +61,7 @@ class Text
 
     public function char()
     {
-        if (false !== ($char = fgetc($this->fp))) {
+        if (false !== ($char = $this->fgetc())) {
             $this->buffer .= $char;
         }
         return $this;
@@ -99,7 +77,7 @@ class Text
 
     public function beginning()
     {
-        fseek($this->fp, 0);
+        $this->fseek(0);
         return $this;
     }
 
@@ -107,7 +85,7 @@ class Text
     {
         $buffer = [];
 
-        while (false !== ($char = fgetc($this->fp))) {
+        while (false !== ($char = $this->fgetc())) {
             array_push($buffer, $char);
             if (sizeof($buffer) > strlen($search)) {
                 array_shift($buffer);
@@ -119,28 +97,17 @@ class Text
         return $this;
     }
 
-    public function remember()
-    {
-        array_push($this->locations, ftell($this->fp));
-        return $this;
-    }
 
     public function end()
     {
-        fseek($this->fp, 0, SEEK_END);
+        $this->fseek(0, SEEK_END);
         return $this;
     }
 
-    public function recall()
-    {
-        $location = array_pop($this->locations);
-        fseek($this->fp, $location);
-        return $this;
-    }
 
     public function move($charLength)
     {
-        fseek($this->fp, $charLength, SEEK_CUR);
+        $this->fseek($charLength, SEEK_CUR);
         return $this;
     }
 
